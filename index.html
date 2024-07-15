@@ -9,29 +9,23 @@
     <!--Stylesheet for header and footer-->
     <link rel="stylesheet" href="stylesheets/main.css">
     <title>Document</title>
+    <style>
+    /* Create two unequal columns that sits next to each other */
+    /* Sidebar/left column */
+    .side {
+        -ms-flex: 30%; /* IE10 */
+        flex: 30%;
+        background-color: #f1f1f1;
+        padding: 20px;
+    }
+    </style>
 </head>
 
 <body>
-<script>
-// Automatic Slideshow - change image every 3 seconds
-    var myIndex = 0;
-    carousel();    
-    function carousel() {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        myIndex++;
-        if (myIndex > x.length) {myIndex = 1}
-        x[myIndex-1].style.display = "block";
-        setTimeout(carousel, 3000);
-    }
-</script>
 
 <!--Navigation bar-->
 <div class="navbar">
-    <a href="#Home" class="w3-button w3-bar-item">Home</a>
+    <a href="homepage.html" class="w3-button w3-bar-item">Home</a>
     <a href="sub/about.html" class="w3-button w3-bar-item">About</a>
     <a href="sub/projects.html" class="w3-button w3-bar-item">Projects</a>
     <a href="#Contact" class="w3-button w3-bar-item">Contact</a>
@@ -40,12 +34,18 @@
 <!--Header-->
 <h1>Testing my hi</h1>
 
-<!-- Slide Show, function not properly implemented yet, need to ask how to add in images -->
-<section>
-    <img class="mySlides" src="" style="width:100%">
-    <img class="mySlides" src="" style="width:100%">
-    <img class="mySlides" src="" style="width:100%">
-</section>
+<!--Sidebar-->
+<div class="side">
+    <h2>About Me</h2>
+    <h5>Photo of me:</h5>
+    <div class="fakeimg" style="height:200px;">Image</div>
+    <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+    <h3>More Text</h3>
+    <p>Lorem ipsum dolor sit ame.</p>
+    <div class="fakeimg" style="height:60px;">Image</div><br>
+    <div class="fakeimg" style="height:60px;">Image</div><br>
+    <div class="fakeimg" style="height:60px;">Image</div>
+</div>
 
 <!-- Footer -->
 <div class="footer">
