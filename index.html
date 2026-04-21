@@ -1,132 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Page Title</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--Icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"> 
-    
-    <!--Stylesheet for header and footer-->
-    <link rel="stylesheet" href="stylesheets/main.css">
-    
+    <title>Jerick Goh - Information Security Student</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <style>
-    * {
-    box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Header/logo Title */
-    .header {
-    padding: 80px;
-    text-align: center;
-    background: #1abc9c;
-    color: white;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
 
-    /* Increase the font size of the heading */
-    .header h1 {
-    font-size: 40px;
-    }
+        .navbar {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    /* Column container */
-    .row {  
-    display: -ms-flexbox; /* IE10 */
-    display: flex;
-    -ms-flex-wrap: wrap; /* IE10 */
-    flex-wrap: wrap;
-    }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
 
-    /* Create two unequal columns that sits next to each other */
-    /* Sidebar/left column */
-    .side {
-    -ms-flex: 30%; /* IE10 */
-    flex: 30%;
-    background-color: #f1f1f1;
-    padding: 20px;
-    }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2563eb;
+            text-decoration: none;
+            padding: 1.25rem 0;
+        }
 
-    /* Main column */
-    .main {   
-    -ms-flex: 70%; /* IE10 */
-    flex: 70%;
-    background-color: white;
-    padding: 20px;
-    }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
 
-    /* Fake image, just for this example */
-    .aboutimage {
-    width: 100%;
-    padding: 20px;
-    }
+        .nav-links a {
+            color: #64748b;
+            text-decoration: none;
+            padding: 1.25rem 0;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
 
-    /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
-    @media screen and (max-width: 700px) {
-    .row {   
-        flex-direction: column;
-    }
-    }
+        .nav-links a:hover {
+            color: #2563eb;
+        }
 
-    /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
-    @media screen and (max-width: 400px) {
-    .navbar a {
-        float: none;
-        width: 100%;
-    }
-    }
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+        }
+
+        .card h3 {
+            color: #1e293b;
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .card p {
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .profile-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .cert-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
+        .cert-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .cert-content {
+            padding: 1.5rem;
+        }
+
+        .cert-date {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        .social-links a:hover {
+            color: #667eea;
+        }
+
+        .footer p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 3rem 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
 
-<!--Header-->
-<div class="header">
-  <h1>Jerick Goh</h1>
-  <p>Student in information security, learning more to achieve more.</p>
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">JG</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="sub/projects.html">Projects</a></li>
+            <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>Jerick Goh</h1>
+    <p>Information Security Student | Aspiring Cybersecurity Professional</p>
+</section>
+
+<div class="container">
+    <section class="section" id="about">
+        <h2 class="section-title">About me</h2>
+        <div class="about-grid">
+            <div>
+                <img src="assets/aboutme.jpg" alt="Jerick Goh" class="profile-img">
+            </div>
+            <div>
+                <p style="color: #475569; margin-bottom: 1.5rem; line-height: 1.8;">
+                    I'm a first-year Information Security student at SIT University, passionate about cybersecurity and continuous learning. Outside of my studies, I enjoy Muay Thai and staying active at the gym.
+                </p>
+                <p style="color: #475569; margin-bottom: 1.5rem; line-height: 1.8;">
+                    My goal is to develop expertise in the cybersecurity field through hands-on projects, professional certifications, and real-world experience. I'm committed to building a strong foundation in security principles while staying current with emerging threats and defense techniques.
+                </p>
+                <h3 style="color: #1e293b; margin-bottom: 1rem; font-size: 1.25rem;">Technical skills</h3>
+                <div class="skills-list">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">Ethical Hacking</span>
+                    <span class="skill-tag">Network Security</span>
+                    <span class="skill-tag">Web Development</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="certifications">
+        <h2 class="section-title">Certifications</h2>
+        <div class="cert-card">
+            <img src="assets/Jerick-CEH-CERT.jpg" alt="CEH Certification" class="cert-img">
+            <div class="cert-content">
+                <p class="cert-date">June 17, 2022</p>
+                <h3 style="margin-bottom: 0.75rem; color: #1e293b;">Certified Ethical Hacker (CEH)</h3>
+                <p style="color: #64748b;">Successfully obtained the Certified Ethical Hacker certification from EC-Council, demonstrating proficiency in identifying security vulnerabilities and implementing defensive strategies using ethical hacking techniques.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Current projects</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Portfolio Website</h3>
+                <p>Building a professional portfolio website to showcase my cybersecurity projects, certifications, and technical skills. This ongoing project helps me develop web development expertise while creating a platform to document my learning journey.</p>
+            </div>
+            <div class="card">
+                <h3>Security Research</h3>
+                <p>Conducting hands-on security research and participating in CTF challenges to sharpen my penetration testing skills and stay updated with the latest security techniques and vulnerabilities.</p>
+            </div>
+        </div>
+    </section>
 </div>
 
-<!--Navigation bar-->
-<div class="navbar">
-    <a href="index.html" class="w3-button w3-bar-item">Home</a>
-    <a href="sub/projects.html" class="w3-button w3-bar-item">Projects</a>
-    <a href="#" class="right">Linkedin</a>
-</div>
-
-<div class="row">
-  <div class="side">
-    <h2>About Me</h2>
-    <h5>Photo of me:</h5>
-    <img class="aboutimage" src="assets/aboutme.jpg" style="width: 100%;">
-    <p>1st year Infosecurity student from SIT university. <br> <br> In my free time, I like to do muay thai and go to the gym. <br> <br> Through my studies, i hope to further hone my skills in the field of cybersecurity by obtaining more certifications and engaging in more projects. </p>
-    <h3>Programming Languages</h3>
-    <p>Some of the languages I have worked</p>
-    <div class="fakeimg" style="height:60px;">Python</div><br>
-    <div class="fakeimg" style="height:60px;">PHP</div><br>
-    <div class="fakeimg" style="height:60px;">Scratch</div>
-  </div>
-  <div class="main">
-    <h2>Certification Obtained</h2>
-    <h5>June 17, 2022</h5>
-    <img class="certimage" src="assets/Jerick-CEH-CERT.jpg" style="width: 100%; height:400px;">
-    <p>Certified Ethical Hacker (CEH)</p>
-    <p>Obtained the CEH certification from EC-council after going through the CEH exam.</p>
-    <br>
-    <h2>What Im working on...</h2>
-    <h5>Resume website</h5>
-    <div class="fakeimg" style="height:200px;">Image</div>
-    <p>Coding a resume website to showcase my previous projects</p>
-    <p>Currently, I set aside a few hours every week to work on coding this resume website, eventually i'd want to add in more details of the various projects i've worked on over the years.</p>
-  </div>
-</div>
-
-<!--Footer-->
-<div class="footer">
-    <a href="#"><i class="fa fa-facebook-official"></i></a>
-    <a href="#"><i class="fa fa-pinterest-p"></i></a>
-    <a href="#"><i class="fa fa-twitter"></i></a>
-    <a href="#"><i class="fa fa-flickr"></i></a>
-    <p class="w3-medium">
-      Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
-    </p>
-</div>
+<footer class="footer">
+    <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="fa fa-facebook-official"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fa fa-linkedin"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fa fa-github"></i></a>
+    </div>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
 
 </body>
 </html>
