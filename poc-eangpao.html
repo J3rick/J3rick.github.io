@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>POC E-Angpao Documentation - Jerick Goh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .navbar {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2563eb;
+            text-decoration: none;
+            padding: 1.25rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #64748b;
+            text-decoration: none;
+            padding: 1.25rem 0;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .doc-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 3rem;
+        }
+
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .sidebar h3 {
+            font-size: 0.9rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar nav ul li a {
+            display: block;
+            color: #475569;
+            text-decoration: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .sidebar nav ul li a:hover {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .sidebar nav ul li a.active {
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        .content {
+            flex: 1;
+            max-width: 900px;
+        }
+
+        .doc-header {
+            margin-bottom: 3rem;
+        }
+
+        .doc-header h1 {
+            font-size: 2.5rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-header p {
+            font-size: 1.1rem;
+            color: #64748b;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 100px;
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .section h3 {
+            font-size: 1.3rem;
+            color: #334155;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section h4 {
+            font-size: 1.1rem;
+            color: #475569;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section p {
+            color: #475569;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .section ul, .section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: #475569;
+        }
+
+        .section li {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .inline-code {
+            background: #f1f5f9;
+            color: #e11d48;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 1.25rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: #1e40af;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1.25rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box p {
+            margin: 0;
+            color: #92400e;
+        }
+
+        .danger-box {
+            background: #fee2e2;
+            border-left: 4px solid #dc2626;
+            padding: 1.25rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+
+        .danger-box p {
+            margin: 0;
+            color: #991b1b;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: #000;
+            border-radius: 8px;
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .screenshot-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .screenshot-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .screenshot-grid img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        table th,
+        table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        @media (max-width: 1024px) {
+            .doc-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: static;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .doc-header h1 {
+                font-size: 2rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="/index.html" class="logo">JG</a>
+        <ul class="nav-links">
+            <li><a href="/index.html#about">About</a></li>
+            <li><a href="/index.html#certifications">Certifications</a></li>
+            <li><a href="/sub/projects.html">Projects</a></li>
+            <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="doc-container">
+    <aside class="sidebar">
+        <h3>Contents</h3>
+        <nav>
+            <ul>
+                <li><a href="#overview" class="active">System Overview</a></li>
+                <li><a href="#purpose">Purpose</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#implementation">Implementation Details</a></li>
+                <li><a href="#vulnerabilities">Vulnerability Showcase</a></li>
+                <li><a href="#attack-demo">Attack Demonstration</a></li>
+                <li><a href="#security-impact">Security Impact</a></li>
+                <li><a href="#secure-implementation">Secure Implementation</a></li>
+                <li><a href="#future-enhancements">Future Enhancements</a></li>
+                <li><a href="#code-repository">Code Repository</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <div class="doc-header">
+            <h1>POC E-Angpao System</h1>
+            <p>A closer look into how the E-Angpao system works - potential vulnerabilities and more</p>
+        </div>
+
+        <section id="overview" class="section">
+            <h2>System Overview & Application Flow</h2>
+        </section>
+
+        <section id="purpose" class="section">
+            <h3>Purpose</h3>
+            <p>E-Angpao is a QR-based digital red packet (angpao) transfer system that digitizes the traditional Asian practice of gifting money in red envelopes. The application demonstrates a common mobile payment flow where senders generate QR codes that recipients scan to claim funds.</p>
+            
+            <p>The purpose of this proof-of-concept project is to showcase how small oversights in server/application configurations can lead to major financial losses. The codes documented will include both an intentionally vulnerable version as well as a secure version that implements security measures remediating showcased vulnerabilities.</p>
+
+            <div class="warning-box">
+                <p><strong>Note:</strong> This project is a simplified proof-of-concept designed to demonstrate security concepts. The described flow is intentionally streamlined for educational purposes and does not reflect the complexity of real-world payment systems, which would include additional layers of authentication, encryption, fraud detection, and regulatory compliance.</p>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="section">
+            <h2>How the System Works</h2>
+
+            <div class="diagram-container">
+                <img src="assets/eangpao_diagram.png" alt="E-Angpao System Flow Diagram">
+            </div>
+
+            <h3>Application Flow</h3>
+            <p>The system operates through four main stages: angpao creation, QR code generation, QR scanning, and fund redemption.</p>
+
+            <h4>Stage 1: Angpao Creation</h4>
+            <p>The sender initiates the transfer by calling <span class="inline-code">POST /create-angpao</span> with their user ID and the desired amount.</p>
+            <ul>
+                <li>The server validates that the sender exists in the user database to prevent false creations</li>
+                <li>It checks that the sender has sufficient balance before deducting the amount from the sender's account</li>
+                <li>It generates a unique cryptographically random token and stores it in a database table alongside an expiry timestamp</li>
+            </ul>
+
+            <h4>Stage 2: QR Code Generation</h4>
+            <p>After creating the token, the server generates a QR code by constructing a redemption URL containing the token ID. It then encodes the URL into a QR code image and returns the QR code as a Base64-encoded PNG. The sender then shares this QR code with the intended recipient.</p>
+
+            <div class="screenshot-container">
+                <img src="assets/attack_step1.png" alt="QR Code Generation Page">
+            </div>
+
+            <h4>Stage 3: QR Scanning</h4>
+            <p>The recipient scans the QR code using their phone's camera, which leads to a browser opening the redemption page displaying a form requesting the recipient's user ID with the token ID pre-populated from the URL parameter.</p>
+
+            <h4>Stage 4: Fund Redemption</h4>
+            <p>When the recipient submits the form, the server processes the redemption by:</p>
+            <ul>
+                <li>Validating that the recipient exists in the database</li>
+                <li>Retrieving the token record and performing checks: verifying the token status is unused, confirming the token has not expired, and ensuring the recipient is not the same as the sender</li>
+                <li>If all checks pass, marking the token as used, crediting the transfer amount to the recipient's balance, and returning a success message</li>
+            </ul>
+        </section>
+
+        <section id="implementation" class="section">
+            <h2>Implementation Details</h2>
+
+            <h3>System Environment</h3>
+            <p>The application is hosted on an Amazon AWS EC2 instance, with public IP address for outside users to access and simulate the redemption process.</p>
+
+            <h3>Libraries Used</h3>
+            <ul>
+                <li><strong>FastAPI (Python)</strong> — Backend framework for REST API endpoints and request handling</li>
+                <li><strong>SQLite with WAL mode</strong> — Lightweight database for persistent storage of users and tokens</li>
+                <li><strong>qrcode library</strong> — Encoding redemption URLs into scannable QR images</li>
+                <li><strong>Pydantic</strong> — Request/response model validation</li>
+                <li><strong>Uvicorn (ASGI)</strong> — Async HTTP server</li>
+            </ul>
+
+            <h3>API Endpoints</h3>
+            <ul>
+                <li><span class="inline-code">GET /users</span> — List all users and balances (debug)</li>
+                <li><span class="inline-code">POST /create-angpao</span> — Create a new angpao and generate QR code</li>
+                <li><span class="inline-code">GET /angpao/{token_id}/qr</span> — Retrieve QR code as PNG image</li>
+                <li><span class="inline-code">GET /redeem-page</span> — HTML redemption form</li>
+                <li><span class="inline-code">POST /redeem</span> — Process angpao redemption</li>
+                <li><span class="inline-code">GET /token-status/{token_id}</span> — Check token status</li>
+                <li><span class="inline-code">GET /docs</span> — Endpoint with all the functions for ease of experimentation</li>
+            </ul>
+
+            <h3>Database Schema</h3>
+            
+            <h4>users table</h4>
+            <p>Stores registered user accounts and their current balances.</p>
+            <ul>
+                <li><span class="inline-code">user_id</span> (TEXT, PK) — Unique identifier for each user</li>
+                <li><span class="inline-code">balance</span> (INTEGER) — Current balance in smallest currency unit</li>
+            </ul>
+
+            <h4>transfer_tokens table</h4>
+            <p>Stores all created angpao tokens and their redemption state.</p>
+            <ul>
+                <li><span class="inline-code">token_id</span> (TEXT, PK) — 32-character unique token</li>
+                <li><span class="inline-code">sender_id</span> (TEXT, FK) — References the user who created the angpao</li>
+                <li><span class="inline-code">receiver_id</span> (TEXT, FK) — References the user who redeemed (null until redeemed)</li>
+                <li><span class="inline-code">status</span> (TEXT) — Current state: UNUSED, USED, or EXPIRED</li>
+                <li><span class="inline-code">expiry_timestamp</span> (REAL) — Unix timestamp when token expires</li>
+                <li><span class="inline-code">created_at</span> (REAL) — Unix timestamp of creation</li>
+                <li><span class="inline-code">redeemed_at</span> (REAL) — Unix timestamp of redemption (null until redeemed)</li>
+            </ul>
+
+            <h3>Token Lifecycle</h3>
+            <p>Tokens transition through three possible states:</p>
+            <ul>
+                <li><strong>UNUSED</strong> — Token created and awaiting redemption (triggered by POST /create-angpao)</li>
+                <li><strong>USED</strong> — Successfully redeemed by a recipient (triggered by POST /redeem)</li>
+                <li><strong>EXPIRED</strong> — Time limit exceeded; in the vulnerable version, funds are not refunded. The secure version implements automatic refund on expiration.</li>
+            </ul>
+
+            <h3>Features</h3>
+            <ul>
+                <li><strong>Token Generation</strong> — Uses secrets.token_hex(16) for cryptographically secure 32-character tokens</li>
+                <li><strong>Transaction Atomicity</strong> — SQLite BEGIN IMMEDIATE locks for concurrent redemption protection</li>
+                <li><strong>Rate Limiting</strong> — 10 requests per 60 seconds per IP address</li>
+                <li><strong>Expiry Handling</strong> — 60-second token validity with automatic refund on expiration</li>
+                <li><strong>Self-Redemption Prevention</strong> — Sender cannot redeem their own angpao</li>
+            </ul>
+
+            <h3>Assumptions and Scopes</h3>
+            <p>This proof-of-concept operates under several assumptions and intentional simplifications:</p>
+            <ul>
+                <li><strong>No refund on expiry:</strong> When a token expires, the sender's funds are not returned (intentional design flaw)</li>
+                <li><strong>XSS vulnerability present:</strong> The /redeem-page endpoint does not sanitize the token query parameter</li>
+                <li><strong>No authentication system:</strong> The application has no login or session management. Users are identified solely by their user_id string</li>
+                <li><strong>Debug endpoints exposed:</strong> The /docs and /users endpoints exist purely for testing</li>
+                <li><strong>No HTTPS:</strong> The application runs over HTTP (production would require TLS/HTTPS)</li>
+                <li><strong>Single-server deployment:</strong> No consideration for load balancing or distributed databases</li>
+                <li><strong>No input validation beyond Pydantic:</strong> No additional sanitization, fraud detection, or anomaly monitoring</li>
+            </ul>
+        </section>
+
+        <section id="vulnerabilities" class="section">
+            <h2>Vulnerability Showcase</h2>
+            <p>The application has security flaws intentionally built into the vulnerable version. Each vulnerability is explained with the affected code, why it's insecure, and what an attacker could achieve by exploiting it.</p>
+
+            <h3>Vulnerability #1 — Fragment-Based URL Payload</h3>
+            <p>The QR code contains a URL with the payload in the fragment (#) rather than as a query parameter. URL fragments are never sent to the server by browsers — they exist only client-side. This means the server cannot log, inspect, or validate the payload during page load, and the client has complete control over decoding the payload and submitting modified values.</p>
+
+            <div class="danger-box">
+                <p><strong>Vulnerable Code:</strong></p>
+            </div>
+
+            <div class="code-block">redemption_url = f"{BASE_URL}/redeem-angpao#{encoded}"</div>
+
+            <h3>Vulnerability #2 — Implicit Client-Side Trust</h3>
+            <p>The server does not store the transaction amount in the database. Instead, the amount is embedded in the QR code payload and the server trusts whatever amount the client submits during redemption. This means that an attacker who intercepts or receives the QR code can decode it and modify the amount to any value they wish.</p>
+
+            <div class="code-block">def _encode_qr_payload(token_id: str, amount: int) -> str:
+    payload = json.dumps({"token_id": token_id, "amount": amount}).encode()
+    return base64.urlsafe_b64encode(payload).decode().rstrip("=")
+
+# During redemption
+redeem_amount = body.amount  # From client POST request
+conn.execute(
+    "UPDATE users SET balance = balance + ? WHERE user_id = ?",
+    (redeem_amount, body.receiver_id),
+)</div>
+
+            <h3>Vulnerability #3 — Missing Amount Column in Database Schema</h3>
+            <p>The transfer_tokens table does not have a dedicated column to store the transaction amount. Recording of the amount only exists in the qr_payload column as an encoded blob. This means that the server has no source of truth to validate redemption claims against.</p>
+
+            <div class="code-block">CREATE TABLE IF NOT EXISTS transfer_tokens (
+    token_id TEXT PRIMARY KEY,
+    sender_id TEXT NOT NULL,
+    receiver_id TEXT,
+    qr_payload TEXT NOT NULL,  -- Amount buried here, not queryable
+    status TEXT NOT NULL DEFAULT 'UNUSED',
+    expiry_timestamp REAL NOT NULL,
+    created_at REAL NOT NULL,
+    redeemed_at REAL
+);</div>
+        </section>
+
+        <section id="attack-demo" class="section">
+            <h2>Demonstration of Attack Scenario</h2>
+            
+            <div class="info-box">
+                <p><strong>Scenario:</strong> User Alice sends a $500 angpao to Charlie. Charlie intercepts the QR code and modifies the amount to $999 before redeeming it.</p>
+            </div>
+
+            <h3>Step 1: Decoding the Received QR</h3>
+            <p>Charlie receives the e-QR link <span class="inline-code">http://3.27.43.60:8000/angpao/c13077de8319e6d27d69a2d923def412</span>.</p>
+            <p>They download the QR code and decode it using zbarimg to reveal the encoded data:</p>
+            
+            <div class="screenshot-container">
+                <img src="assets/attack_step2.png" alt="Decoding QR code with zbarimg">
+            </div>
+
+            <h3>Step 2: Decoding the URL Payload</h3>
+            <p>Charlie identifies that the payload after the # is base64 encoded and decodes it:</p>
+            
+            <div class="screenshot-container">
+                <img src="assets/attack_step3.png" alt="Base64 decoding the payload">
+            </div>
+
+            <p>The decoded payload reveals:</p>
+            <div class="code-block">{"token_id": "c13077de8319e6d27d69a2d923def412", "amount": 500}</div>
+
+            <h3>Step 3: Crafting Malicious Payload</h3>
+            <p>With knowledge of the encoding method, Charlie creates a new payload with an inflated amount:</p>
+            
+            <div class="screenshot-container">
+                <img src="assets/attack_step4.png" alt="Creating malicious payload with amount 999">
+            </div>
+
+            <p>Charlie generates a new malicious URL and creates a QR code from it:</p>
+
+            <div class="screenshot-container">
+                <img src="assets/attack_step5.png" alt="Generating malicious QR code">
+            </div>
+
+            <div class="screenshot-container">
+                <img src="assets/attack_step6.png" alt="Comparison of original and malicious QR codes">
+            </div>
+
+            <h3>Step 4: Exploitation</h3>
+            <p>When Charlie scans the modified QR code, the redemption page displays <strong>$999.00</strong> instead of the original $500.00:</p>
+
+            <div class="screenshot-container">
+                <img src="assets/attack_step7.png" alt="Redemption page showing $999.00">
+            </div>
+
+            <p>After clicking "Redeem" with user ID "charlie", the transaction is successful:</p>
+
+            <div class="screenshot-container">
+                <img src="assets/attack_step8.png" alt="Successful redemption of $999.00">
+            </div>
+
+            <h3>Attack Result</h3>
+            <p>The final state shows Charlie's balance has been credited with $999, while Alice was only debited $500:</p>
+
+            <div class="screenshot-container">
+                <img src="assets/endattack.png" alt="Final database state showing the discrepancy">
+            </div>
+
+            <div class="danger-box">
+                <p><strong>Impact:</strong> Alice is only debited the original amount (500) she specified at creation. The sender's balance is deducted upfront when the angpao is created, not at redemption. The vulnerability only affects the receiver's credit — Charlie receives 999 instead of 500. The credited amount exceeds the authorized transfer value, effectively inflating the receiver's balance without a corresponding debit.</p>
+            </div>
+        </section>
+
+        <section id="security-impact" class="section">
+            <h2>Security Impact</h2>
+            
+            <p>While not indicative of a real-world system, the application's client-trusted amount vulnerability has severe consequences across multiple dimensions.</p>
+
+            <h3>Financial Perspective</h3>
+            <p>Attackers can claim unlimited funds regardless of what the sender authorized — the sender's account is only debited the original amount while the excess is effectively created from nothing, limited only by database integer limits.</p>
+
+            <h3>Integrity Issues</h3>
+            <p>Transaction records become meaningless since the logged amounts reflect attacker input rather than actual transaction values, corrupting any audit trail and making forensic analysis impossible. Total user balances would eventually exceed total deposits, a clear indicator of systematic fraud.</p>
+
+            <h3>Trust & Compliance</h3>
+            <p>This fundamentally breaks user trust in the platform. Users cannot rely on the system to honor intended transaction amounts, and for any real financial application, this vulnerability would make regulatory compliance impossible.</p>
+
+            <div class="warning-box">
+                <p><strong>Real-world analogy:</strong> This flaw is equivalent to a bank letting customers write their own check amounts, a vending machine dispensing items based on what customers claim to have paid, or a casino paying out winnings based on what players say they bet.</p>
+            </div>
+        </section>
+
+        <section id="secure-implementation" class="section">
+            <h2>Secure Implementation</h2>
+            
+            <p>The above demonstrated vulnerability shows how security and server misconfigurations can lead to potentially devastating financial impacts. Below are secure remediations that could be implemented to mitigate/prevent this vulnerability.</p>
+
+            <h3>1. Server-Side Amount Storage and Validation</h3>
+            <p>Store the amount in the transfer_tokens table at creation time and use it for validation during redemption.</p>
+
+            <div class="code-block">CREATE TABLE transfer_tokens (
+    token_id TEXT PRIMARY KEY,
+    sender_id TEXT NOT NULL,
+    amount INTEGER NOT NULL CHECK (amount > 0),  -- Add this field
+    ...
+);
+
+# At redemption time, use server-stored amount
+token = conn.execute(
+    "SELECT amount FROM transfer_tokens WHERE token_id = ?",
+    (body.token_id,)
+).fetchone()
+
+# Credit using the authoritative server-side value
+conn.execute(
+    "UPDATE users SET balance = balance + ? WHERE user_id = ?",
+    (token["amount"], body.receiver_id),
+)</div>
+
+            <h3>2. Remove Sensitive Data from Client-Controlled Payloads</h3>
+            <p>Only include the token ID in the QR code. The application will then check against the token database for the amount to be credited.</p>
+
+            <div class="info-box">
+                <p><strong>Secure approach:</strong> Use standard query parameters instead of URL fragments so the server can log and inspect all incoming redemption requests.</p>
+            </div>
+
+            <div class="code-block">QR Code contains: https://example.com/redeem-page?token=abc123</div>
+
+            <h3>Additional Security Features</h3>
+            
+            <h4>Automatic Refunds on Token Expiry</h4>
+            <p>Tokens expire after 60 seconds, and when expiry is detected, funds are automatically returned to the sender. This is implemented through a <span class="inline-code">_refund_expired_token()</span> function which marks the token as expired and credits the sender's balance in a single atomic operation.</p>
+
+            <p>The refund is triggered in two scenarios:</p>
+            <ul>
+                <li>When someone attempts to redeem an expired token</li>
+                <li>When anyone checks the status of an expired token (lazy expiry)</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Note:</strong> This feature was impossible to implement in the vulnerable version because the transaction amount was not stored in the database. By storing the amount server-side, the secure version ensures that unclaimed funds are always recoverable.</p>
+            </div>
+        </section>
+
+        <section id="future-enhancements" class="section">
+            <h2>Future Enhancements</h2>
+            
+            <h3>Cryptographic Integrity Mechanisms (HMAC)</h3>
+            <p>One additional enhancement that can be added is the implementation of cryptographic integrity mechanisms such as HMAC.</p>
+
+            <p>With HMAC, the server would generate a signature over the token ID and any associated metadata using a secret key, then append this signature to the QR payload. Upon redemption, the server would recompute the signature and compare it against the one provided — any tampering with the token would result in a signature mismatch and rejection.</p>
+
+            <h3>Use Cases for HMAC</h3>
+            <p>This approach is particularly valuable in:</p>
+            <ul>
+                <li><strong>Distributed systems</strong> where multiple servers handle redemptions and may not share immediate database access</li>
+                <li><strong>Offline-capable scenarios</strong> where the recipient's device needs to verify token authenticity before contacting the server</li>
+                <li><strong>High-volume production systems</strong> requiring offline verification</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Current approach:</strong> For this proof-of-concept, server-side storage is sufficient since all validation occurs against a single database. However, for production systems, HMAC or similar signing mechanisms (such as JWT with signed claims) would provide cryptographic assurance that tokens have not been forged or modified in transit.</p>
+            </div>
+        </section>
+
+        <section id="code-repository" class="section">
+            <h2>Code Repository</h2>
+            
+            <p>The complete source code for both the vulnerable and secure versions of this E-Angpao system is available on GitHub:</p>
+
+            <p style="text-align: center; margin: 2rem 0;">
+                <a href="https://github.com/J3rick/POC-QR" target="_blank" style="display: inline-block; background: #2563eb; color: white; padding: 0.75rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 500; transition: background 0.2s;">
+                    <i class="fa fa-github" style="margin-right: 0.5rem;"></i>View on GitHub
+                </a>
+            </p>
+
+            <div class="danger-box">
+                <p><strong>Legal Disclaimer:</strong></p>
+                <p style="margin-top: 0.75rem;">This proof-of-concept system is provided strictly for educational and research purposes to demonstrate security vulnerabilities. This code is NOT intended for production use and should NEVER be deployed in any real-world environment handling actual financial transactions.</p>
+                <p style="margin-top: 0.75rem;">By accessing, downloading, or using this code, you acknowledge and agree that:</p>
+                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                    <li>The creator assumes NO responsibility or liability for any damages, financial losses, security breaches, or other consequences arising from the use, misuse, or deployment of this code</li>
+                    <li>You use this code entirely at your own risk</li>
+                    <li>Any deployment of this system in a production environment is done without the authorization or endorsement of the creator</li>
+                    <li>You are solely responsible for ensuring compliance with all applicable laws and regulations in your jurisdiction</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<footer class="footer">
+    <p>© 2026 Jerick Goh | <a href="https://github.com/J3rick/POC-QR" target="_blank">View Project on GitHub</a></p>
+</footer>
+
+<script>
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Highlight active section in sidebar
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('.sidebar nav a');
+
+function highlightActiveSection() {
+    let currentSection = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        
+        if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + currentSection) {
+            link.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', highlightActiveSection);
+highlightActiveSection();
+</script>
+
+</body>
+</html>
